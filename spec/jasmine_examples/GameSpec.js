@@ -1,22 +1,24 @@
 describe("Game", function () {
   var Game = require('../../lib/Game');
 
+  var mockBoard, game;
+
+  beforeEach(function() {
+    mockBoard = {play: () => {}};
+    game = new Game(mockBoard);
+  });
+
   describe('#new', function () {
     it('initializes with a new board', function () {
-        var mockBoard = {};
-        var game = new Game(mockBoard);
-        expect(game.board).toEqual(mockBoard);
+      expect(game.board).toEqual(mockBoard);
     });
   });
 
   describe("#play", function () {
-    var mockBoard = { play: () => {}};
-    var game = new Game(mockBoard);
-    var mockField = {};
-    it("returns an updated board and a game status", function () {
+    it("calls #play on the board", function () {
       spyOn(mockBoard, "play");
-      game.play(mockField, mockBoard);
-      expect(mockBoard.play).toHaveBeenCalledWith(mockField);
+      game.play(1);
+      expect(mockBoard.play).toHaveBeenCalledWith(1);
     });
   });
 });
