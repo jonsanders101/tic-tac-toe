@@ -21,7 +21,13 @@ describe("Game", function () {
     it("calls #play on the board", function () {
       spyOn(mockBoard, "play");
       game.play(1);
-      expect(mockBoard.play).toHaveBeenCalledWith(1);
+      expect(mockBoard.play).toHaveBeenCalledWith(1, "X");
+    });
+    it("alternates the players", function () {
+      spyOn(mockBoard, "play");
+      game.play(1);
+      game.play(1);
+      expect(mockBoard.play).toHaveBeenCalledWith(1, "O");
     });
   });
 });
