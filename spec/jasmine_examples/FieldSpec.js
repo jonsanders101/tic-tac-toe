@@ -1,6 +1,10 @@
 describe("Field", function () {
   var Field = require('../../lib/Field');
-  var field = new Field(0);
+  var field;
+
+  beforeEach(function () {
+    field = new Field(0);
+  });
 
   describe('#new', function () {
 
@@ -15,6 +19,10 @@ describe("Field", function () {
     it('changes value to mark of player', function () {
       field.playField("X");
       expect(field.value).toEqual("X");
+    });
+    it('raises error if field has already been played', function () {
+      field.playField("X");
+      expect(() => {field.playField("X");}).toThrow("Field has already been played");
     });
   });
 });
