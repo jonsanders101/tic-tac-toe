@@ -12,6 +12,9 @@ describe("Game", function () {
     it('initializes with a new board', function () {
       expect(game.board).toEqual(mockBoard);
     });
+    it('initializes with two players', function () {
+      expect(game.players).toEqual(["X", "O"]);
+    });
   });
 
   describe("#play", function () {
