@@ -6,5 +6,9 @@ describe("Cell", function () {
       var cell = new Cell(0);
       expect(cell.position).toEqual(0);
     });
+    it('should instantiate with null value', function () {
+      var cell = new Cell(0);
+      expect(cell.value).toEqual(null);
+    })
   });
 });
