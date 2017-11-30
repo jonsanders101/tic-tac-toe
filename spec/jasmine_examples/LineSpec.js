@@ -23,5 +23,13 @@ describe("Line", function () {
       setFields(["O", "X", "X"]);
       expect(line.isWon()).toEqual(false);
     });
+    it('should return false if values of one field is null', function () {
+      setFields([null, "X", "X"]);
+      expect(line.isWon()).toEqual(false);
+    });
+    it('should return false if values of all fields are null', function () {
+      setFields([null, null, null]);
+      expect(line.isWon()).toEqual(false);
+    });
   });
 });
