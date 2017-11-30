@@ -57,5 +57,10 @@ describe("Board", function () {
       board.play(0, "X");
       expect(mockField.playField).toHaveBeenCalled();
     });
+    it("returns 'draw' if all fields have been played", function () {
+      var mockField = {playField: () => {}, value: "X"};
+      board.fields = [mockField];
+      expect(board.play(0, "X")).toEqual([board, "draw"]);
+    });
   });
 });
