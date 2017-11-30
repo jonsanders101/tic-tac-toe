@@ -27,3 +27,4 @@ Here I will add notes on my approach as I work on the project. This will include
 * Instead of each field knowing about its neighbour fields, I will use line objects which know about three fields. This will allow the logic for each line to be the same.
 * The responsibility for checking the fields for three matching values should belong to the line.
 * Reviewing the brief, each section of the board is referred to as a 'field'. To avoid confusion, I have renamed my Cell object to Field, and my Field Object to Line.
+* I've used helper methods to unpack the values of the position properties for each of the fields which Board creates. This feels like a lot of setup for a test, but I can't see a solution which adequately ensures the number and ordering of new fields in the board.
