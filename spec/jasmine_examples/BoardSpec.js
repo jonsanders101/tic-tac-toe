@@ -5,7 +5,8 @@ describe("Board", function () {
       this.position = position;
     }
 
-    function mockLine () {
+    function mockLine (fields) {
+      this.fields = fields;
     }
 
     function fieldPositions (fields) {
@@ -25,8 +26,9 @@ describe("Board", function () {
 
       expect(fieldPositions(board.fields)).toEqual(testFields);
     });
-    it('creates 8 lines', function () {
-      expect(board.lines.length).toEqual(8);
+    it('creates line 0 with fields 0, 3, 6', function () {
+      expect(board.lines[0].fields).toEqual([0, 3, 6]);
     });
+
   });
 });
