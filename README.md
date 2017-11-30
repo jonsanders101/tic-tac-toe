@@ -26,3 +26,4 @@ Here I will add notes on my approach as I work on the project. This will include
 * How will the user select a field? I had considered using an X and Y axis requiring the user to pass in two values to the `#play` method. This might make the method more extensible if the grid needed to be larger later. However, for the needs of a 3x3 board, referencing each field by a number from 1 to 9 seems sensible.
 * Instead of each field knowing about its neighbour fields, I will use line objects which know about three fields. This will allow the logic for each line to be the same.
 * The responsibility for checking the fields for three matching values should belong to the line.
+* Reviewing the brief, each section of the board is referred to as a 'field'. To avoid confusion, I have renamed my Cell object to Field, and my Field Object to Line.
