@@ -3,15 +3,12 @@ describe("Game", function () {
 
   describe("#play", function () {
     var game = new Game();
-    var mockField = {playField: () => {}};
-    var mockBoard = { fields: [mockField] };
+    var mockField = {};
+    var mockBoard = { play: () => {}};
     it("returns an updated board and a game status", function () {
-      expect(game.play(0, mockBoard)).toEqual([mockBoard, 'pending']);
-    });
-    it("calls #playField", function () {
-      spyOn(mockField, "playField");
-      game.play(0, mockBoard);
-      expect(mockField.playField).toHaveBeenCalled();
+      spyOn(mockBoard, "play");
+      game.play(mockField, mockBoard);
+      expect(mockBoard.play).toHaveBeenCalledWith(mockField);
     });
   });
 });
