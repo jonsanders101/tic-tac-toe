@@ -17,6 +17,7 @@ The rules of tic-tac-toe are as follows:
 ## Technologies Used
 
 * JavaScript
+* Jasmine - testing framework
 
 ## Approach
 
