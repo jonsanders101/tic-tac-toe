@@ -1,11 +1,11 @@
 describe("Board", function () {
   var Board = require('../../lib/Board');
 
-    function mockField (position) {
+    function MockField (position) {
       this.position = position;
     }
 
-    function mockLine (fields) {
+    function MockLine (fields) {
       this.fields = fields;
     }
 
@@ -18,7 +18,7 @@ describe("Board", function () {
     }
 
     var testFields = [0,1,2,3,4,5,6,7,8];
-    var board = new Board(mockField, mockLine);
+    var board = new Board(MockField, MockLine);
 
   describe("#new", function () {
     it('should create 9 fields with position references', function () {
@@ -47,6 +47,15 @@ describe("Board", function () {
     });
     it('creates line 7 with fields 0, 1, 2', function () {
       expect(board.lines[7].fields).toEqual([2, 4, 6]);
+    });
+  });
+  describe('#play', function () {
+    it("calls #playField", function () {
+      var mockField = {playField: () => {}};
+      board.fields = [mockField];
+      spyOn(mockField, "playField");
+      board.play(0, "X");
+      expect(mockField.playField).toHaveBeenCalled();
     });
   });
 });
