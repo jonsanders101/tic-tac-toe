@@ -51,21 +51,88 @@ describe("Board", function () {
   });
   describe('#play', function () {
     it("calls #playField", function () {
-      var mockField = {playField: () => {}};
-      board.fields = [mockField];
-      spyOn(mockField, "playField");
+      board.fields = [ { position: 0, value: "O", playField: () => {} },
+                       { position: 1, value: "X" },
+                       { position: 2, value: "O" },
+                       { position: 3, value: "X" },
+                       { position: 4, value: "O" },
+                       { position: 5, value: "X" },
+                       { position: 6, value: "O" },
+                       { position: 7, value: "X" },
+                       { position: 8, value: "O" } ];
+      board.lines = [  { fields: [ 0, 3, 6 ], isWon: () => {return false} },
+                      { fields: [ 1, 4, 7 ], isWon: () => {return false}  },
+                      { fields: [ 2, 5, 8 ], isWon: () => {return false}  },
+                      { fields: [ 0, 1, 2 ], isWon: () => {return false}  },
+                      { fields: [ 3, 4, 5 ], isWon: () => {return false}  },
+                      { fields: [ 6, 7, 8 ], isWon: () => {return false}  },
+                      { fields: [ 0, 4, 8 ], isWon: () => {return false}  },
+                      { fields: [ 2, 4, 6 ], isWon: () => {return false}  } ];
+      spyOn(board.fields[0], "playField");
       board.play(0, "X");
-      expect(mockField.playField).toHaveBeenCalled();
+      expect(board.fields[0].playField).toHaveBeenCalled();
     });
     it("returns 'draw' if all fields have been played", function () {
-      var mockField = {playField: () => {}, value: "X"};
-      board.fields = [mockField];
+      board.fields = [ { position: 0, value: "O", playField: () => {} },
+                       { position: 1, value: "X" },
+                       { position: 2, value: "O" },
+                       { position: 3, value: "X" },
+                       { position: 4, value: "O" },
+                       { position: 5, value: "X" },
+                       { position: 6, value: "O" },
+                       { position: 7, value: "X" },
+                       { position: 8, value: "O" } ];
+      board.lines = [  { fields: [ 0, 3, 6 ], isWon: () => {return false} },
+                      { fields: [ 1, 4, 7 ], isWon: () => {return false}  },
+                      { fields: [ 2, 5, 8 ], isWon: () => {return false}  },
+                      { fields: [ 0, 1, 2 ], isWon: () => {return false}  },
+                      { fields: [ 3, 4, 5 ], isWon: () => {return false}  },
+                      { fields: [ 6, 7, 8 ], isWon: () => {return false}  },
+                      { fields: [ 0, 4, 8 ], isWon: () => {return false}  },
+                      { fields: [ 2, 4, 6 ], isWon: () => {return false}  } ];
+
       expect(board.play(0, "X")).toEqual([board, "draw"]);
     });
     it("returns 'pending' if game is still in play", function () {
-      var mockFields = [{playField: () => {}, value: null}, {playField: () => {}, value: null}];
-      board.fields = mockFields;
+      board.fields = [ { position: 0, value: null, playField: () => {} },
+                       { position: 1, value: "X" },
+                       { position: 2, value: null },
+                       { position: 3, value: null },
+                       { position: 4, value: null },
+                       { position: 5, value: null },
+                       { position: 6, value: null },
+                       { position: 7, value: null },
+                       { position: 8, value: null } ];
+      board.lines = [  { fields: [ 0, 3, 6 ], isWon: () => {return false} },
+                      { fields: [ 1, 4, 7 ], isWon: () => {return false}  },
+                      { fields: [ 2, 5, 8 ], isWon: () => {return false}  },
+                      { fields: [ 0, 1, 2 ], isWon: () => {return false}  },
+                      { fields: [ 3, 4, 5 ], isWon: () => {return false}  },
+                      { fields: [ 6, 7, 8 ], isWon: () => {return false}  },
+                      { fields: [ 0, 4, 8 ], isWon: () => {return false}  },
+                      { fields: [ 2, 4, 6 ], isWon: () => {return false}  } ];
+
       expect(board.play(0, "X")).toEqual([board, "pending"]);
+    });
+    it("returns 'won' if game is won", function () {
+      board.fields = [ { position: 0, value: null, playField: () => {} },
+                       { position: 1, value: "X" },
+                       { position: 2, value: "X" },
+                       { position: 3, value: null },
+                       { position: 4, value: null },
+                       { position: 5, value: null },
+                       { position: 6, value: null },
+                       { position: 7, value: null },
+                       { position: 8, value: null } ];
+      board.lines = [  { fields: [ 0, 3, 6 ],  isWon: () => {return false} },
+                      {  fields: [ 1, 4, 7 ],  isWon: () => {return false}  },
+                      {  fields: [ 2, 5, 8 ],  isWon: () => {return false}  },
+                      {  fields: [ 0, 1, 2 ],  isWon: () => {return true}  },
+                      {  fields: [ 3, 4, 5 ],  isWon: () => {return false}  },
+                      {  fields: [ 6, 7, 8 ],  isWon: () => {return false}  },
+                      {  fields: [ 0, 4, 8 ],  isWon: () => {return false}  },
+                      {  fields: [ 2, 4, 6 ],  isWon: () => {return false}  } ];
+      expect(board.play(0, "X")).toEqual([board, "won"]);
     });
   });
 });
