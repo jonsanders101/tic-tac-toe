@@ -62,5 +62,10 @@ describe("Board", function () {
       board.fields = [mockField];
       expect(board.play(0, "X")).toEqual([board, "draw"]);
     });
+    it("returns 'pending' if game is still in play", function () {
+      var mockFields = [{playField: () => {}, value: null}, {playField: () => {}, value: null}];
+      board.fields = mockFields;
+      expect(board.play(0, "X")).toEqual([board, "pending"]);
+    });
   });
 });
