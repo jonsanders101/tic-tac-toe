@@ -16,7 +16,6 @@ describe("Board", function () {
       }
       return fieldPositions;
     }
-
     var testFields = [0,1,2,3,4,5,6,7,8];
     var board = new Board(MockField, MockLine);
 
@@ -111,7 +110,6 @@ describe("Board", function () {
                       { fields: [ 6, 7, 8 ], isWon: () => {return false}  },
                       { fields: [ 0, 4, 8 ], isWon: () => {return false}  },
                       { fields: [ 2, 4, 6 ], isWon: () => {return false}  } ];
-
       expect(board.play(0, "X")).toEqual([board, "pending"]);
     });
     it("returns 'won' if game is won", function () {
